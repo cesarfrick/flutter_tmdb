@@ -1,6 +1,9 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
+import 'package:tmdb_app/components/card.dart';
+import 'package:tmdb_app/controllers/custom_search_delegate.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
 
@@ -11,14 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           floating: true,
-          expandedHeight: 50.0,
+          pinned: true,
+          expandedHeight: 70.0,
           flexibleSpace: FlexibleSpaceBar(
             background: SizedBox(
               child: Image.asset(
@@ -51,30 +47,44 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          actions: [
+            IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  showSearch(
+                      context: context, delegate: CustomSearchDelegate());
+                }),
+          ],
         ),
         SliverFillViewport(
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
+            return ListView(
+              scrollDirection: Axis.horizontal,
+              children: const <Widget>[
+                MovieCard(
+                  title: 'Game of Thrones',
+                  releaseDate: 'April 27, 2011',
+                  imageSrc: 'assets/images/got_poster.jpeg',
+                  rating: 84,
                 ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headline4,
+                MovieCard(
+                  title: 'Game of Thrones',
+                  releaseDate: 'April 27, 2011',
+                  imageSrc: 'assets/images/got_poster.jpeg',
+                  rating: 84,
+                ),
+                MovieCard(
+                  title: 'Game of Thrones',
+                  releaseDate: 'April 27, 2011',
+                  imageSrc: 'assets/images/got_poster.jpeg',
+                  rating: 84,
                 ),
               ],
             );
           }, childCount: 1),
         ),
       ]),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
