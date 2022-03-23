@@ -2,6 +2,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 import 'package:tmdb_app/components/card.dart';
+import 'package:tmdb_app/components/cards_list.dart';
 import 'package:tmdb_app/controllers/custom_search_delegate.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -59,29 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
         SliverFillViewport(
           delegate:
               SliverChildBuilderDelegate((BuildContext context, int index) {
-            return ListView(
-              scrollDirection: Axis.horizontal,
-              children: const <Widget>[
-                MovieCard(
-                  title: 'Game of Thrones',
-                  releaseDate: 'April 27, 2011',
-                  imageSrc: 'assets/images/got_poster.jpeg',
-                  rating: 84,
-                ),
-                MovieCard(
-                  title: 'Game of Thrones',
-                  releaseDate: 'April 27, 2011',
-                  imageSrc: 'assets/images/got_poster.jpeg',
-                  rating: 84,
-                ),
-                MovieCard(
-                  title: 'Game of Thrones',
-                  releaseDate: 'April 27, 2011',
-                  imageSrc: 'assets/images/got_poster.jpeg',
-                  rating: 84,
-                ),
-              ],
-            );
+            return const CardsList();
           }, childCount: 1),
         ),
       ]),
