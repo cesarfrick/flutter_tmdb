@@ -37,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           floating: true,
-          pinned: true,
           expandedHeight: 70.0,
           flexibleSpace: FlexibleSpaceBar(
             background: SizedBox(
