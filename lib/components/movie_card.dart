@@ -22,7 +22,9 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(
+        right: 16.0,
+      ),
       child: Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +41,7 @@ class MovieCard extends StatelessWidget {
             ),
             Container(
               width: calculateWidth(rating),
-              height: 20,
+              // height: 20,
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle, //BoxShape.circle,
                 color: Colors.blue[600],
@@ -47,10 +49,18 @@ class MovieCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    '$rating%',
-                    style: const TextStyle(
-                      color: Colors.white,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      right: 8.0,
+                      top: 4.0,
+                      bottom: 4.0,
+                    ),
+                    child: Text(
+                      '$rating%',
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
