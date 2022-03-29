@@ -1,7 +1,6 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
-import 'package:tmdb_app/components/card.dart';
 import 'package:tmdb_app/components/cards_list.dart';
 import 'package:tmdb_app/controllers/custom_search_delegate.dart';
 
@@ -56,11 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
           ],
         ),
-        SliverFillViewport(
+        SliverList(
           delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return const CardsList();
-          }, childCount: 1),
+              SliverChildListDelegate(
+                [for (var i = 0; i < 3; i++) const CardsList()])
         ),
       ]),
     );
