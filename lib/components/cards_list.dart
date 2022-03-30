@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import 'package:tmdb_app/components/movie_card.dart';
+import 'package:tmdb_app/screens/details.dart';
 
 class CardsList extends StatelessWidget {
   const CardsList({
@@ -30,11 +32,24 @@ class CardsList extends StatelessWidget {
             height: 300,
             child: ListView.builder(
               itemBuilder: (context, i) {
-                return const MovieCard(
+                return MovieCard(
                   title: 'Game of Thrones',
                   releaseDate: 'April 27, 2011',
                   imageSrc: 'assets/images/got_poster.jpeg',
                   rating: 84,
+                  id: 1234,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Details(
+                          title: 'Game of Thrones',
+                          posterSrc: 'assets/images/got_poster.jpeg',
+                          id: 1234,
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
               itemCount: 3,

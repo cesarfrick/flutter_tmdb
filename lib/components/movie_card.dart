@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
+
   final String title;
   final String releaseDate;
   final String imageSrc;
   final int rating;
+  final int id;
+  final Function? onTap;
+
   final double _containerWidth = 150;
 
   const MovieCard({
@@ -13,9 +17,11 @@ class MovieCard extends StatelessWidget {
     required this.releaseDate,
     required this.imageSrc,
     required this.rating,
+    required this.id,
+    this.onTap,
   }) : super(key: key);
 
-  double calculateWidth(int percentage) {
+  double _calculateWidth(int percentage) {
     return _containerWidth * percentage / 100;
   }
 
@@ -36,14 +42,19 @@ class MovieCard extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.asset(imageSrc),
+                child: Hero(
+                  tag: id,
+                  child: GestureDetector(
+                    child: Image.asset(imageSrc, fit: BoxFit.cover),
+                    onTap: () => onTap == null ? () {} : onTap!(),
+                  ),
+                ),
               ),
             ),
             Container(
-              width: calculateWidth(rating),
-              // height: 20,
+              width: _calculateWidth(rating),
               decoration: BoxDecoration(
-                shape: BoxShape.rectangle, //BoxShape.circle,
+                shape: BoxShape.rectangle,
                 color: Colors.blue[600],
               ),
               child: Row(
