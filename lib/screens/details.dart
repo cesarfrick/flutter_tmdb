@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tmdb_app/components/top_bar.dart';
 
 class Details extends StatelessWidget {
   const Details({
@@ -15,11 +17,25 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Hero(
-        tag: id,
-        child: Image.asset(posterSrc),
-        transitionOnUserGestures: true,
+      body: CustomScrollView(
+        slivers: [
+          const TopBar(),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    Hero(
+                      tag: id,
+                      child: Image.asset(posterSrc),
+                    ),
+                    Text(title),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

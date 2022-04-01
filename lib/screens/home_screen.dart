@@ -2,6 +2,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 import 'package:tmdb_app/components/cards_list.dart';
+import 'package:tmdb_app/components/top_bar.dart';
 import 'package:tmdb_app/controllers/custom_search_delegate.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,37 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: CustomScrollView(slivers: <Widget>[
-        SliverAppBar(
-          title: SvgPicture.asset(
-            'assets/images/tmdb_logo_square.svg',
-            width: 50,
-            color: Colors.white,
-          ),
-          floating: true,
-          expandedHeight: 70.0,
-          flexibleSpace: FlexibleSpaceBar(
-            background: SizedBox(
-              child: Image.asset(
-                'assets/images/bar_bg.jpeg',
-                fit: BoxFit.cover,
-                alignment: Alignment.topCenter,
-              ),
-            ),
-          ),
-          actions: [
-            IconButton(
-                icon: const Icon(Icons.search),
-                onPressed: () {
-                  showSearch(
-                      context: context, delegate: CustomSearchDelegate());
-                }),
-          ],
-        ),
+        const TopBar(),
         SliverList(
-          delegate:
-              SliverChildListDelegate(
-                [for (var i = 0; i < 3; i++) const CardsList()])
-        ),
+            delegate: SliverChildListDelegate(
+                [for (var i = 0; i < 3; i++) CardsList()])),
       ]),
     );
   }
