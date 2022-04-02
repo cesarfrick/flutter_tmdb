@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const TopBar(),
         SliverList(
             delegate: SliverChildListDelegate(
-                [for (var i = 0; i < 3; i++) CardsList()])),
+                [for (var i = 0; i < 3; i++) const CardsList()])),
       ]),
     );
   }
