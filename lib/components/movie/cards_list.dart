@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
-import 'package:tmdb_app/components/movie_card.dart';
+import 'package:tmdb_app/components/movie/movie_card.dart';
 import 'package:tmdb_app/screens/details.dart';
 
 class CardsList extends StatelessWidget {
@@ -42,7 +41,7 @@ class CardsList extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Details(
+                        builder: (context) => Details(
                           title: 'Game of Thrones',
                           posterSrc: 'assets/images/got_poster.jpeg',
                           id: 1234,
