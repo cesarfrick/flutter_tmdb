@@ -1,9 +1,13 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tmdb_app/components/cast/cast_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
+import 'package:tmdb_app/models/actor.dart';
 
 class Details extends StatelessWidget {
-  const Details({
+  Details({
     Key? key,
     required this.title,
     required this.posterSrc,
@@ -14,6 +18,12 @@ class Details extends StatelessWidget {
   final String posterSrc;
   final Object id;
 
+  Actor actor = const Actor(
+    imgSrc: 'assets/images/gemma_chan.jpeg',
+    name: 'Gemma Chan',
+    character: 'Sersi',
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +31,60 @@ class Details extends StatelessWidget {
         slivers: [
           const TopBar(),
           SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Row(
+                children: [
+                  Hero(
+                    tag: id,
+                    child: SizedBox(
+                      child: Image.asset(posterSrc),
+                      height: 300,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text('Game of Thrones'),
+                        Divider(height: 16),
+                        Text('Release: someday'),
+                        Text('Genre: drama'),
+                        Text('Rate: 84%'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    Hero(
-                      tag: id,
-                      child: Image.asset(posterSrc),
-                    ),
-                    Text(title),
-                  ],
+                const Divider(
+                  height: 16,
+                  thickness: 2,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                const Text('tagline'),
+                const Text('Overview'),
+                const Text(
+                    'Cillum deserunt sunt laboris sunt officia eiusmod tempor enim occaecat officia pariatur ad minim ut. Esse ad esse et aliquip labore laborum mollit pariatur dolore non aute eu. Laborum ea pariatur cillum laboris cupidatat eu amet.'),
+                const Divider(
+                  height: 16,
+                  thickness: 2,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    height: 200,
+                    child:
+                        CastList(actors: [actor, actor, actor, actor, actor]),
+                  ),
                 ),
               ],
             ),

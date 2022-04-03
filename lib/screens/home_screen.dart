@@ -1,7 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
-import 'package:tmdb_app/components/cards_list.dart';
+import 'package:tmdb_app/components/movie/movies_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
 import 'package:tmdb_app/controllers/custom_search_delegate.dart';
 
