@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:tmdb_app/components/movie/movies_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
-import 'package:tmdb_app/controllers/custom_search_delegate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
