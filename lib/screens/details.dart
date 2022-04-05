@@ -1,13 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tmdb_app/components/cast/cast_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
 import 'package:tmdb_app/models/actor.dart';
 
 class Details extends StatelessWidget {
-  Details({
+  const Details({
     Key? key,
     required this.title,
     required this.posterSrc,
@@ -18,7 +15,7 @@ class Details extends StatelessWidget {
   final String posterSrc;
   final Object id;
 
-  Actor actor = const Actor(
+  final Actor actor = const Actor(
     imgSrc: 'assets/images/gemma_chan.jpeg',
     name: 'Gemma Chan',
     character: 'Sersi',
@@ -83,7 +80,7 @@ class Details extends StatelessWidget {
                   child: SizedBox(
                     height: 200,
                     child:
-                        CastList(actors: [actor, actor, actor, actor, actor]),
+                        CastList(actors: [for (int i = 0; i < 6; i++) actor]),
                   ),
                 ),
               ],
