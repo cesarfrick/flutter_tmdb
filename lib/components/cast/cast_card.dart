@@ -27,12 +27,18 @@ class CastCard extends StatelessWidget {
               SizedBox(
                 height: 150,
                 child: ClipRRect(
-                  child: Image.asset(imgSrc),
+                  child: GestureDetector(
+                    child: Hero(
+                      tag: name,
+                      child: Image.asset(imgSrc),
+                    ),
+                    onTap: () {},
+                  ),
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),
               Text(name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   )),
               Text(character),
