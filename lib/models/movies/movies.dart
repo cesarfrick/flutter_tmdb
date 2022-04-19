@@ -10,13 +10,13 @@ import 'package:tmdb_app/models/movies/movie.dart';
 class Movies {
   const Movies({
     required this.page,
-    required this.results,
+    required this.data,
     required this.totalPages,
     required this.totalResults,
   });
 
   final int page;
-  final List<Movie> results;
+  final List<Movie> data;
   final int totalPages;
   final int totalResults;
 
@@ -26,7 +26,7 @@ class Movies {
 
   factory Movies.fromJson(Map<String, dynamic> json) => Movies(
         page: json["page"],
-        results:
+        data:
             List<Movie>.from(json["results"].map((x) => Movie.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
@@ -34,7 +34,7 @@ class Movies {
 
   Map<String, dynamic> toJson() => {
         "page": page,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "results": List<dynamic>.from(data.map((x) => x.toJson())),
         "total_pages": totalPages,
         "total_results": totalResults,
       };
