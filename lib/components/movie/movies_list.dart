@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:tmdb_app/components/movie/movie_card.dart';
 import 'package:tmdb_app/screens/details.dart';
+import 'package:tmdb_app/models/movies/movie.dart';
 
 class CardsList extends StatelessWidget {
   const CardsList({
     Key? key,
+    required this.movies,
   }) : super(key: key);
+
+  final List<Movie> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +35,29 @@ class CardsList extends StatelessWidget {
             height: 300,
             child: ListView.builder(
               itemBuilder: (context, i) {
+                final movie = movies[i];
+
                 return MovieCard(
-                  title: 'Game of Thrones',
+                  title: movie.title,
                   releaseDate: 'April 27, 2011',
                   imageSrc: 'assets/images/got_poster.jpeg',
                   rating: 84,
-                  id: 1234,
+                  id: movie.id,
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Details(
-                          title: 'Game of Thrones',
+                          title: movie.title,
                           posterSrc: 'assets/images/got_poster.jpeg',
-                          id: 1234,
+                          id: movie.id,
                         ),
                       ),
                     );
                   },
                 );
               },
-              itemCount: 3,
+              itemCount: movies.length,
               scrollDirection: Axis.horizontal,
             ),
           ),

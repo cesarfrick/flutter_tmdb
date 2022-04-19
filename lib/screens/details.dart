@@ -43,12 +43,12 @@ class Details extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text('Game of Thrones'),
-                        Divider(height: 16),
-                        Text('Release: someday'),
-                        Text('Genre: drama'),
-                        Text('Rate: 84%'),
+                      children: [
+                        Text(title),
+                        const Divider(height: 16),
+                        const Text('Release: someday'),
+                        const Text('Genre: drama'),
+                        const Text('Rate: 84%'),
                       ],
                     ),
                   ),
@@ -58,31 +58,31 @@ class Details extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Column(
-              children: [
-                const Divider(
+              children: const [
+                Divider(
                   height: 16,
                   thickness: 2,
                   indent: 10,
                   endIndent: 10,
                 ),
-                const Text('tagline'),
-                const Text('Overview'),
-                const Text(
+                Text('tagline'),
+                Text('Overview'),
+                Text(
                     'Cillum deserunt sunt laboris sunt officia eiusmod tempor enim occaecat officia pariatur ad minim ut. Esse ad esse et aliquip labore laborum mollit pariatur dolore non aute eu. Laborum ea pariatur cillum laboris cupidatat eu amet.'),
-                const Divider(
+                Divider(
                   height: 16,
                   thickness: 2,
                   indent: 10,
                   endIndent: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: SizedBox(
-                    height: 200,
-                    child:
-                        CastList(actors: [for (int i = 0; i < 6; i++) actor]),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(8),
+                //   child: SizedBox(
+                //     height: 200,
+                //     child:
+                //         CastList(actors: [for (int i = 0; i < 6; i++) actor]),
+                //   ),
+                // ),
               ],
             ),
           )
