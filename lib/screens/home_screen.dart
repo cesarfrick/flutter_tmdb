@@ -5,7 +5,7 @@ import 'package:tmdb_app/components/movie/movies_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
 import 'package:tmdb_app/models/movies/movie.dart';
 import 'package:tmdb_app/models/movies/movies.dart';
-import 'package:tmdb_app/service/movies_api.dart';
+import 'package:tmdb_app/services/movie_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    movies = Service.getMovies();
+    movies = MovieService.getMovies();
     super.initState();
   }
 

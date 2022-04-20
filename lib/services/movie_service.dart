@@ -2,7 +2,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/widgets.dart';
 import 'package:tmdb_app/models/movies/movies.dart';
 
-class Service {
+class MovieService {
   static Future<Movies> getMovies() async {
     try {
       String moviesJSON =
