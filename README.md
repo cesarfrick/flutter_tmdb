@@ -1,6 +1,10 @@
-# tmdb_app
+# TMDB App
 
-A new Flutter project.
+A Flutter mobile app that uses TMDB API to show information about movies, cast, and crew.
+
+This application is for educational purposes only and it's not intended for production.
+
+This is just a personal project made to better understand how Flutter works for mobile applications.
 
 ## Getting Started
 
