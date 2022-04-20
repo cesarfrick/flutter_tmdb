@@ -39,9 +39,9 @@ class CardsList extends StatelessWidget {
 
                 return MovieCard(
                   title: movie.title,
-                  releaseDate: 'April 27, 2011',
+                  releaseDate: movie.releaseDate,
                   imageSrc: 'assets/images/got_poster.jpeg',
-                  rating: 84,
+                  rating: movie.voteAverage * 10,
                   id: movie.id,
                   onTap: () {
                     Navigator.push(

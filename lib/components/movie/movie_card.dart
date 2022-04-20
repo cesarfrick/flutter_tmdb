@@ -1,8 +1,24 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+
+List<String> months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 
 class MovieCard extends StatelessWidget {
   final String title;
-  final String releaseDate;
+  final DateTime releaseDate;
   final String imageSrc;
   final int rating;
   final int id;
@@ -22,6 +38,11 @@ class MovieCard extends StatelessWidget {
 
   double _calculateWidth(int percentage) {
     return _containerWidth * percentage / 100;
+  }
+
+  String _formatDate(DateTime date) {
+    String dataString = '${months[date.month - 1]} ${date.day}, ${date.year}';
+    return dataString;
   }
 
   @override
@@ -77,7 +98,7 @@ class MovieCard extends StatelessWidget {
               ),
             ),
             Text(title),
-            Text(releaseDate),
+            Text(_formatDate(releaseDate)),
           ],
         ),
       ),

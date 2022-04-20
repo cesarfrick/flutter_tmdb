@@ -14,7 +14,7 @@ class Movie {
     required this.releaseDate,
     required this.title,
     // required this.video,
-    // required this.voteAverage,
+    required this.voteAverage,
     // required this.voteCount,
   });
 
@@ -30,7 +30,7 @@ class Movie {
   final DateTime releaseDate;
   final String title;
   // final bool video;
-  // final double voteAverage;
+  final int voteAverage;
   // final int voteCount;
 
   factory Movie.fromRawJson(String str) => Movie.fromJson(json.decode(str));
@@ -51,7 +51,7 @@ class Movie {
         releaseDate: DateTime.parse(json["release_date"]),
         title: json["title"],
         // video: json["video"],
-        // voteAverage: json["vote_average"].toDouble(),
+        voteAverage: json["vote_average"].toInt(),
         // voteCount: json["vote_count"],
       );
 
