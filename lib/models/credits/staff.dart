@@ -11,12 +11,12 @@ class Staff {
     required this.name,
     required this.originalName,
     required this.popularity,
-    required this.profilePath,
-    required this.castId,
-    required this.character,
     required this.creditId,
-    required this.order,
-    required this.job,
+    this.order,
+    this.character,
+    this.castId,
+    this.profilePath,
+    this.job,
     this.department,
   });
 
@@ -27,13 +27,13 @@ class Staff {
   final String name;
   final String originalName;
   final double popularity;
-  final String profilePath;
-  final int castId;
-  final String character;
   final String creditId;
-  final int order;
+  final int? order;
+  final String? profilePath;
+  final String? character;
+  final int? castId;
   final Department? department;
-  final String job;
+  final String? job;
 
   factory Staff.fromRawJson(String str) => Staff.fromJson(json.decode(str));
 
