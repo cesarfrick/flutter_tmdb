@@ -51,6 +51,8 @@ class CardsList extends StatelessWidget {
                           title: movie.title,
                           posterSrc: 'assets/images/got_poster.jpeg',
                           id: movie.id,
+                          rating: movie.voteAverage,
+                          releaseDate: movie.releaseDate,
                         ),
                       ),
                     );
