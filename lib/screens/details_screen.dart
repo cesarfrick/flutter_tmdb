@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:global_configs/global_configs.dart';
 
 import 'package:tmdb_app/components/cast/cast_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
@@ -6,8 +9,8 @@ import 'package:tmdb_app/models/actor.dart';
 import 'package:tmdb_app/models/movies/movie_details.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
-class Details extends StatefulWidget {
-  const Details({
+class DetailsScreen extends StatefulWidget {
+  const DetailsScreen({
     Key? key,
     required this.title,
     required this.posterSrc,
@@ -23,10 +26,12 @@ class Details extends StatefulWidget {
   final int rating;
 
   @override
-  State<Details> createState() => _DetailsState();
+  State<DetailsScreen> createState() => _DetailsScreenState();
 }
 
-class _DetailsState extends State<Details> {
+class _DetailsScreenState extends State<DetailsScreen> {
+  final String baseUrl = GlobalConfigs().get('api.images.base_url');
+  final String backdropWidth = GlobalConfigs().get('api.images.backdrop_sizes')[0];
   late Future<MovieDetails> movie;
   String genres = '';
 
@@ -57,50 +62,70 @@ class _DetailsState extends State<Details> {
         slivers: [
           const TopBar(),
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: Row(
+            child: FutureBuilder(
+              future: movie,
+              builder: (context, snapshot){
+                final MovieDetails movie = snapshot.data as MovieDetails;
+                return Stack(
                 children: [
-                  Hero(
-                    tag: widget.id,
-                    child: SizedBox(
-                      child: Image.asset(widget.posterSrc),
-                      height: 300,
+                  ImageFiltered(
+                    imageFilter: ImageFilter.blur(
+                      sigmaX: 3,
+                      sigmaY: 3,
+                    ),
+                    child: Image.network(
+                      '$baseUrl$backdropWidth${movie.backdropPath}',
+                      fit: BoxFit.cover,
+                      height: 292,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SizedBox(
-                      width: 170,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text(
-                              '${widget.title} (${widget.releaseDate.year})',
-                              style: const TextStyle(fontSize: 16),
-                            ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Hero(
+                          tag: widget.id,
+                          child: SizedBox(
+                            child: Image.network(widget.posterSrc),
+                            height: 300,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text(
-                              'Released on: ${_formattedDate(widget.releaseDate)}',
-                            ),
-                          ),
-                          if (genres != '')
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text('Genre(s): $genres'),
-                            ),
-                          Text('Rate: ${widget.rating * 10}%'),
-                        ],
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SizedBox(
+                          width: 170,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  '${widget.title} (${widget.releaseDate.year})',
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  'Released on: ${_formattedDate(widget.releaseDate)}',
+                                ),
+                              ),
+                              if (genres != '')
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: Text('Genre(s): $genres'),
+                                ),
+                              Text('Rate: ${widget.rating * 10}%'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
-              ),
+              )},
             ),
           ),
           SliverToBoxAdapter(
@@ -151,22 +176,22 @@ class _DetailsState extends State<Details> {
                         indent: 10,
                         endIndent: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: SizedBox(
-                          height: 200,
-                          child: CastList(
-                              actors: [for (int i = 0; i < 6; i++) actor]),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: SizedBox(
-                          height: 200,
-                          child: CastList(
-                              actors: [for (int i = 0; i < 6; i++) actor]),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8),
+                      //   child: SizedBox(
+                      //     height: 200,
+                      //     child: CastList(
+                      //         actors: [for (int i = 0; i < 6; i++) actor]),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8),
+                      //   child: SizedBox(
+                      //     height: 200,
+                      //     child: CastList(
+                      //         actors: [for (int i = 0; i < 6; i++) actor]),
+                      //   ),
+                      // ),
                     ],
                   );
                 } else if (snapshot.hasError) {
