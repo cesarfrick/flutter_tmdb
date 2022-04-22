@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 List<String> months = [
   'Jan',
@@ -64,7 +65,11 @@ class MovieCard extends StatelessWidget {
                 child: Hero(
                   tag: id,
                   child: GestureDetector(
-                    child: Image.asset(imageSrc, fit: BoxFit.cover),
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: imageSrc,
+                      fit: BoxFit.cover,
+                    ),
                     onTap: () => onTap == null ? () {} : onTap!(),
                   ),
                 ),
