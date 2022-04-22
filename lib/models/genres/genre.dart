@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class Genre {
-  Genre({
+  const Genre({
     required this.id,
     required this.name,
   });
