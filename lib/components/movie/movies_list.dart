@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:global_configs/global_configs.dart';
 
 import 'package:tmdb_app/components/movie/movie_card.dart';
-import 'package:tmdb_app/screens/details.dart';
+import 'package:tmdb_app/screens/details_screen.dart';
 import 'package:tmdb_app/models/movies/movie.dart';
 
 class CardsList extends StatelessWidget {
-  const CardsList({
+  CardsList({
     Key? key,
     required this.movies,
   }) : super(key: key);
 
   final List<Movie> movies;
+
+  final String _imgBaseURL = GlobalConfigs().get('api.images.base_url');
+  final String _posterSize = GlobalConfigs().get('api.images.poster_sizes')[3];
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +41,22 @@ class CardsList extends StatelessWidget {
             child: ListView.builder(
               itemBuilder: (context, i) {
                 final movie = movies[i];
+                final String posterSrc =
+                    '$_imgBaseURL$_posterSize${movie.posterPath}';
 
                 return MovieCard(
                   title: movie.title,
                   releaseDate: movie.releaseDate,
-                  imageSrc: 'assets/images/got_poster.jpeg',
+                  imageSrc: posterSrc,
                   rating: movie.voteAverage * 10,
                   id: movie.id,
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Details(
+                        builder: (context) => DetailsScreen(
                           title: movie.title,
-                          posterSrc: 'assets/images/got_poster.jpeg',
+                          posterSrc: posterSrc,
                           id: movie.id,
                           rating: movie.voteAverage,
                           releaseDate: movie.releaseDate,

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:global_configs/global_configs.dart';
 import 'package:tmdb_app/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await GlobalConfigs()
+      .loadJsonFromdir('assets/data/api_config.json', path: 'api');
+
   runApp(const MyApp());
 }
 
