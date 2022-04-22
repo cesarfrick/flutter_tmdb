@@ -26,8 +26,7 @@ class Movies {
 
   factory Movies.fromJson(Map<String, dynamic> json) => Movies(
         page: json["page"],
-        data:
-            List<Movie>.from(json["results"].map((x) => Movie.fromJson(x))),
+        data: List<Movie>.from(json["results"].map((x) => Movie.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
