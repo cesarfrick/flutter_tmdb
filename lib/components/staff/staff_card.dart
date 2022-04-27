@@ -29,8 +29,7 @@ class StaffCard extends StatelessWidget {
           alignment: AlignmentDirectional.topCenter,
           children: [
             SizedBox(
-              height: 150,
-              width: 180,
+              width: 140,
               child: GestureDetector(
                 child: imgSrc == null
                     ? Image.asset(
