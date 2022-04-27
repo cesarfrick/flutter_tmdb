@@ -13,7 +13,7 @@ class CardsList extends StatelessWidget {
 
   final List<Movie> movies;
 
-  final String _imgBaseURL = GlobalConfigs().get('api.images.base_url');
+  final String _imgBaseURL = GlobalConfigs().get('api.images.secure_base_url');
   final String _posterSize = GlobalConfigs().get('api.images.poster_sizes')[3];
 
 
