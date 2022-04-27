@@ -5,7 +5,6 @@ import 'package:global_configs/global_configs.dart';
 
 import 'package:tmdb_app/components/staff/staff_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
-import 'package:tmdb_app/models/actor.dart';
 import 'package:tmdb_app/models/movies/movie_details.dart';
 import 'package:tmdb_app/services/movie_service.dart';
 
@@ -35,12 +34,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
       GlobalConfigs().get('api.images.backdrop_sizes')[0];
   late Future<MovieDetails> movie;
   String genres = '';
-
-  final Actor actor = const Actor(
-    imgSrc: 'assets/images/gemma_chan.jpeg',
-    name: 'Gemma Chan',
-    character: 'Sersi',
-  );
 
   String _formattedDate(DateTime date) =>
       '${date.month}/${date.day}/${date.year}';
@@ -135,7 +128,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   return Text(snapshot.error.toString());
                 }
 
-                return const CircularProgressIndicator();
+                return const Center(
+                  child: CircularProgressIndicator(),
+                  heightFactor: 10,
+                  widthFactor: 10,
+                );
               },
             ),
           ),
