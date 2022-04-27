@@ -31,15 +31,21 @@ class StaffCard extends StatelessWidget {
             SizedBox(
               width: 140,
               child: GestureDetector(
-                child: imgSrc == null
-                    ? Image.asset(
-                        defaultImg,
-                        fit: fitValue,
-                      )
-                    : Image.network(
-                        '$baseUrl$imgSize$imgSrc',
-                        fit: fitValue,
-                      ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(4),
+                    topRight: Radius.circular(4),
+                  ),
+                  child: imgSrc == null
+                      ? Image.asset(
+                          defaultImg,
+                          fit: fitValue,
+                        )
+                      : Image.network(
+                          '$baseUrl$imgSize$imgSrc',
+                          fit: fitValue,
+                        ),
+                ),
               ),
             ),
             Positioned(
