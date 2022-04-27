@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:global_configs/global_configs.dart';
 
-// import 'package:tmdb_app/components/cast/cast_list.dart';
+import 'package:tmdb_app/components/staff/staff_list.dart';
 import 'package:tmdb_app/components/top_bar.dart';
 import 'package:tmdb_app/models/actor.dart';
 import 'package:tmdb_app/models/movies/movie_details.dart';
@@ -66,68 +66,76 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: FutureBuilder(
               future: movie,
               builder: (context, snapshot) {
-                final MovieDetails movie = snapshot.data as MovieDetails;
-                return Stack(
-                  children: [
-                    ImageFiltered(
-                      imageFilter: ImageFilter.blur(
-                        sigmaX: 3,
-                        sigmaY: 3,
-                        tileMode: TileMode.mirror,
+                if (snapshot.hasData) {
+                  final MovieDetails movie = snapshot.data as MovieDetails;
+                  return Stack(
+                    children: [
+                      ImageFiltered(
+                        imageFilter: ImageFilter.blur(
+                          sigmaX: 3,
+                          sigmaY: 3,
+                          tileMode: TileMode.mirror,
+                        ),
+                        child: Image.network(
+                          '$baseUrl$backdropWidth${movie.backdropPath}',
+                          fit: BoxFit.cover,
+                          height: 292,
+                        ),
                       ),
-                      child: Image.network(
-                        '$baseUrl$backdropWidth${movie.backdropPath}',
-                        fit: BoxFit.cover,
-                        height: 292,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Hero(
-                            tag: widget.id,
-                            child: SizedBox(
-                              child: Image.network(widget.posterSrc),
-                              height: 300,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Hero(
+                              tag: widget.id,
+                              child: SizedBox(
+                                child: Image.network(widget.posterSrc),
+                                height: 300,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
-                            width: 170,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Text(
-                                    '${widget.title} (${widget.releaseDate.year})',
-                                    style: const TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Text(
-                                    'Released on: ${_formattedDate(widget.releaseDate)}',
-                                  ),
-                                ),
-                                if (genres != '')
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: SizedBox(
+                              width: 170,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
-                                    child: Text('Genre(s): $genres'),
+                                    child: Text(
+                                      '${widget.title} (${widget.releaseDate.year})',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
                                   ),
-                                Text('Rate: ${widget.rating * 10}%'),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Text(
+                                      'Released on: ${_formattedDate(widget.releaseDate)}',
+                                    ),
+                                  ),
+                                  if (genres != '')
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8.0),
+                                      child: Text('Genre(s): $genres'),
+                                    ),
+                                  Text('Rate: ${widget.rating * 10}%'),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
+                        ],
+                      ),
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                }
+
+                return const CircularProgressIndicator();
               },
             ),
           ),
@@ -179,22 +187,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         indent: 10,
                         endIndent: 10,
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8),
-                      //   child: SizedBox(
-                      //     height: 200,
-                      //     child: CastList(
-                      //         actors: [for (int i = 0; i < 6; i++) actor]),
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8),
-                      //   child: SizedBox(
-                      //     height: 200,
-                      //     child: CastList(
-                      //         actors: [for (int i = 0; i < 6; i++) actor]),
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: SizedBox(
+                          height: 200,
+                          child: StaffList(staff: details.credits.cast),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: SizedBox(
+                          height: 200,
+                          child: StaffList(staff: details.credits.crew),
+                        ),
+                      ),
                     ],
                   );
                 } else if (snapshot.hasError) {
