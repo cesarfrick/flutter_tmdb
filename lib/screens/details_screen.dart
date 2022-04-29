@@ -77,14 +77,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: Hero(
-                              tag: widget.id,
-                              child: SizedBox(
-                                child: Image.network(widget.posterSrc),
-                                height: 300,
-                              ),
+                          Hero(
+                            tag: widget.id,
+                            child: SizedBox(
+                              child: Image.network(widget.posterSrc),
+                              height: 300,
                             ),
                           ),
                           Padding(
