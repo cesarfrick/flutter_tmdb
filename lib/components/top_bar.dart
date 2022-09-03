@@ -16,12 +16,10 @@ class TopBar extends StatelessWidget {
       floating: true,
       expandedHeight: 70.0,
       flexibleSpace: FlexibleSpaceBar(
-        background: SizedBox(
-          child: Image.asset(
-            'assets/images/bar_bg.jpeg',
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-          ),
+        background: Image.asset(
+          'assets/images/bar_bg.jpeg',
+          fit: BoxFit.cover,
+          alignment: Alignment.topCenter,
         ),
       ),
       actions: [
