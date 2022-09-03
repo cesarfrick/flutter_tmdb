@@ -36,10 +36,6 @@ class MovieCard extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
 
-  double _calculateWidth(int percentage) {
-    return _containerWidth * percentage / 100;
-  }
-
   String _formatDate(DateTime date) {
     String dataString = '${months[date.month - 1]} ${date.day}, ${date.year}';
     return dataString;
